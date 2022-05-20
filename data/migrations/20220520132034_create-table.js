@@ -16,7 +16,7 @@ exports.up = async function(knex) {
         tbl.increments("task_id")
         tbl.varchar("task_description", 128).notNullable()
         tbl.varchar("task_notes")
-        tbl.boolean("task_completed")
+        tbl.boolean("task_completed").defaultTo(false);
         tbl.integer("project_id").unsigned().notNullable().references("project_id").inTable("projects")
     })
     .createTable('project_resources', tbl => {
