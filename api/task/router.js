@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', checkTasks,(req, res) => {
     Tasks.post(req.body)
     .then(result => {
         result.task_completed = Boolean(result.task_completed)
