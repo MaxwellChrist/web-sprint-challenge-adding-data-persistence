@@ -6,6 +6,13 @@ function getAll() {
     .join('projects as p', 't.project_id', 'p.project_id')
 }
 
+function post(item) {
+    return db('tasks').insert(item)
+    .then(result => {
+        return db('tasks').where("task_id", result).first()
+    })
+}
+
 module.exports = {
-    getAll
+    getAll, post
 }
