@@ -1,6 +1,6 @@
 const express = require('express')
 const Tasks = require('./model')
-const { checkTasks } = require('./middleware')
+const { checkProjectId, checkTaskInfoComplete } = require('./middleware')
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', checkTasks,(req, res) => {
+router.post('/', checkTaskInfoComplete, checkProjectId, (req, res) => {
     Tasks.post(req.body)
     .then(result => {
         result.task_completed = Boolean(result.task_completed)
